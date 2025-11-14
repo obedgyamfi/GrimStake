@@ -6,7 +6,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 
 // token logos
-import ethLogo from '@/public/ethereum-eth-logo.png'
 import usdtLogo from '@/public/tether-usdt-logo.png'
 import usdcLogo from '@/public/usd-coin-usdc-logo.png'
 import wethLogo from '@/public/wrapped-ether-weth-logo-png.png'
@@ -205,20 +204,48 @@ export default function StakePage() {
     unstake(token as Address, amt);
   };
 
-
   async function handleAddToken() {
-    if (!selected || !chainId) return;
+    // 1. Ensure wallet is connected 
+    if (!userAddress) {
+      toast.error("Please connect your wallet first.");
+      return;
+    }
+
+    // 2. Ensure token + chain
+    if (!selected || !chainId) {
+      toast.error("Token or network not detected.");
+      return;
+    }
 
     const tokenAddress = selected.addresses[chainId];
-    if (!tokenAddress) return;
+    if (!tokenAddress) {
+      toast.error("This token is not available on the selected network.");
+      return;
+    }
 
-    await addTokenToWallet({
-      address: tokenAddress,
-      symbol: selected.symbol,
-      decimals: selected.decimals,
-      image: selected.logo.src,
-    });
+    // 3. Attempt to add token
+    try {
+      toast.loading(`Adding ${selected.symbol} to wallet…`);
+
+      await addTokenToWallet({
+        address: tokenAddress,
+        symbol: selected.symbol,
+        decimals: selected.decimals,
+        image: selected.logo.src,
+      });
+
+      toast.success(`${selected.symbol} added to your wallet.`);
+    } catch (err: any) {
+      // metamask errors (user rejects, unsupported)
+      if (err?.message?.includes("user rejected")) {
+        toast.error("Request cancelled.");
+      } else {
+        toast.error("Could not add token to wallet.");
+      }
+      console.error(err);
+    }
   }
+
 
   useEffect(() => {
     if (!isApproved) return;

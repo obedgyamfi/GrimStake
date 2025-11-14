@@ -14,6 +14,10 @@ Deployed live on **Sepolia Testnet**.
 
 ---
 
+## Preview
+![GrimStake Hero Page](./frontend/public/demo-preview/demo-pic-1.png)
+![GrimStake Staking dApp](./frontend/public/demo-preview/demo-pic-2.png)
+
 # Table of Contents
 
 1. [Overview](#overview)

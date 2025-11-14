@@ -1,3 +1,5 @@
+import toast from "react-hot-toast"
+
 export async function addTokenToWallet({
   address,
   symbol,
@@ -15,7 +17,7 @@ export async function addTokenToWallet({
 
     const ethereum = (window as any).ethereum;
     if (!ethereum) {
-      console.error("No crypto wallet detected");
+      toast.error("No crypto wallet detected"); // changed thsi to toast error
       return;
     }
 
@@ -34,6 +36,6 @@ export async function addTokenToWallet({
 
     return wasAdded;
   } catch (error) {
-    console.error("Failed to add token:", error);
+    toast.error(`{Failed to add token: ${error}`);
   }
 }

@@ -6,7 +6,7 @@ interface PoolOverviewCardProps {
   loading: boolean;
   tvl: number;
   rewardRate?: bigint;
-  aprPercent: number;
+  aprPercent: string;
   contractAddress?: string;
   symbol: string;
   delay?: number;
@@ -54,7 +54,7 @@ export function PoolOverviewCard({
               <tr className="border-b border-white/10">
                 <td className="py-2 px-2 text-gray-400">APR</td>
                 <td className="py-2 px-2 text-center text-green-400">
-                  {aprPercent.toFixed(2)}%
+                  {aprPercent}%
                 </td>
               </tr>
 

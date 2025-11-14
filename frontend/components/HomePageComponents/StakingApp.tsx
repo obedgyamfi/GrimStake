@@ -127,7 +127,11 @@ export default function StakePage() {
   const totalStaked = poolStats?.[0];
   const rewardRate = poolStats?.[1];
   const aprBps = poolStats?.[2];
-  const aprPercent = aprBps ? Number(aprBps) / 100 : 0;
+  const aprDisplay = aprBps ? Number(aprBps) / 100 : 0;
+  const aprPercent = Intl.NumberFormat('en', {
+    notation: 'compact',
+    maximumFractionDigits: 2
+  }).format(aprDisplay)
   const tvl = totalStaked ? Number(totalStaked) / 10 ** selected.decimals : 0;
 
   // user stake  position

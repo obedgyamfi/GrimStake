@@ -1,7 +1,7 @@
-# Grim Vault — Testnet Staking dApp
+# Grim Stake — Testnet Staking dApp
 
 A full-stack Web3 staking application built with Solidity, Hardhat, Next.js, Wagmi, RainbowKit, and viem.
-Grim Vault is a testnet staking platform for demonstrating:
+Grim Stake is a testnet staking platform for demonstrating:
 
 * ERC-20 staking
 * Real-time rewards
@@ -35,7 +35,7 @@ Deployed live on **Sepolia Testnet**.
 
 # Overview
 
-Grim Vault provides a fully functional staking environment:
+Grim Stake provides a fully functional staking environment:
 
 * Stake ERC-20 test tokens
 * Earn block-based rewards
